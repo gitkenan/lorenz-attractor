@@ -1,6 +1,35 @@
 # Lorenz Attractor Model
 
-This project models the Lorenz attractor, a classic example of a chaotic system that demonstrates sensitivity to initial conditions.
+An interactive visualization of the Lorenz attractor that allows real-time parameter adjustment to explore chaos theory and dynamic systems. Watch how the famous butterfly-shaped attractor changes as you modify its parameters!
+
+## Interactive Visualization
+
+This application provides a dynamic, real-time visualization of the Lorenz system. Key features include:
+
+### Parameter Controls
+Adjust these parameters in real-time using smooth sliders:
+- σ (Sigma): 0-50 (default: 10.0)
+  - Controls fluid viscosity
+  - Higher values = more "sticky" fluid
+- ρ (Rho): 0-100 (default: 28.0)
+  - Controls temperature difference
+  - Values > 24.74 create chaotic behavior
+- β (Beta): 0-20 (default: 8/3)
+  - Controls system geometry
+  - Affects the "wings" of the butterfly pattern
+
+### Visual Features
+- Multiple trajectories with different initial conditions
+- Color-coded paths for better visualization
+- Dark theme for enhanced contrast
+- Real-time updates as parameters change
+- Interactive 3D navigation (rotate, zoom, pan)
+
+### Observing Chaos
+1. Start with default parameters to see the classic butterfly pattern
+2. Make small adjustments to ρ to see how the system becomes chaotic
+3. Watch multiple trajectories diverge despite similar starting points
+4. Use the navigation toolbar to rotate and explore the 3D structure
 
 ## Requirements and Installation
 
@@ -203,67 +232,6 @@ Our program creates a 3D visualization of the Lorenz attractor that looks like a
    - The crossing points: places where the system can go multiple different ways
 
 This visualization helps us understand how a simple set of rules (our three equations) can create complex, unpredictable behavior while still maintaining an overall structure. It's a beautiful example of chaos: unpredictable in detail, but predictable in general pattern.
-
-## Interactive Controls
-
-The visualization now includes real-time parameter controls that allow you to explore how changes in the system parameters affect the behavior of the Lorenz attractor:
-
-### Parameter Sliders
-
-1. **σ (Sigma) Slider**: 0-50
-   - Controls how quickly the system responds to differences in temperature
-   - Lower values: slower response
-   - Higher values: faster response
-   - Default: 10.0
-
-2. **ρ (Rho) Slider**: 0-100
-   - Controls the temperature difference driving the convection
-   - Values < 1: No convection, system stabilizes
-   - Values > 24.74: Chaotic behavior emerges
-   - Default: 28.0
-
-3. **β (Beta) Slider**: 0-20
-   - Controls the physical shape of the system
-   - Affects the size and shape of the attractor's "wings"
-   - Default: 8.0
-
-### Interesting Parameter Combinations to Try:
-
-1. **Classic Chaos** (Default):
-   - σ = 10.0
-   - ρ = 28.0
-   - β = 8/3
-   - Shows the classic butterfly-shaped attractor
-
-2. **Stable System**:
-   - σ = 10.0
-   - ρ = 20.0
-   - β = 8/3
-   - System stabilizes to a single point
-
-3. **Periodic Behavior**:
-   - σ = 10.0
-   - ρ = 100.0
-   - β = 8/3
-   - Creates more complex orbital patterns
-
-4. **Extreme Chaos**:
-   - σ = 14.0
-   - ρ = 28.0
-   - β = 2.67
-   - Shows more erratic behavior
-
-### View Controls:
-- Left click + drag: Rotate the view
-- Right click + drag: Pan the view
-- Mouse wheel: Zoom in/out
-- 'R' key: Reset to default view
-
-### Additional Features:
-- Reset Parameters button to return to default values
-- Real-time trajectory updates as parameters change
-- Color-coded trajectories for different initial conditions
-- Current parameter values displayed in the visualization
 
 ## Chaos Theory and the Butterfly Effect
 
