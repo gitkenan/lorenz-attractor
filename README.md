@@ -2,9 +2,26 @@
 
 An interactive visualization of the Lorenz attractor that allows real-time parameter adjustment to explore chaos theory and dynamic systems. Watch how the famous butterfly-shaped attractor changes as you modify its parameters!
 
-## Interactive Visualization
+## Table of Contents
+- [Interactive Features](#interactive-features)
+  - [Parameter Controls](#parameter-controls)
+  - [Visual Features](#visual-features)
+  - [Observing Chaos](#observing-chaos)
+- [Installation Guide](#installation-guide)
+  - [Windows](#windows)
+  - [macOS](#macos)
+  - [Linux](#linux)
+- [Running the Application](#running-the-application)
+- [Troubleshooting](#troubleshooting)
+- [Mathematical Background](#mathematical-background)
+  - [Parameters and Their Meaning](#parameters-and-their-meaning)
+  - [The Equations](#the-equations)
+  - [Understanding the Visualization](#understanding-the-visualization)
+- [Theory and Concepts](#theory-and-concepts)
+  - [Historical Background](#historical-background)
+  - [Chaos Theory](#chaos-theory)
 
-This application provides a dynamic, real-time visualization of the Lorenz system. Key features include:
+## Interactive Features
 
 ### Parameter Controls
 Adjust these parameters in real-time using smooth sliders:
@@ -31,17 +48,19 @@ Adjust these parameters in real-time using smooth sliders:
 3. Watch multiple trajectories diverge despite similar starting points
 4. Use the navigation toolbar to rotate and explore the 3D structure
 
-## Requirements and Installation
+## Installation Guide
 
 ### Windows
-- Python 3.10 or later
+- Python 3.10 or later (with Tkinter, included by default)
 - Required Python packages:
   - numpy
   - matplotlib
 
-#### Installation Steps
+#### Steps
 1. Install Python 3.10 from [Python's official website](https://www.python.org/downloads/)
-   - During installation, make sure to check "Add Python to PATH"
+   - During installation, check:
+     * "Add Python to PATH"
+     * "tcl/tk and IDLE" (should be checked by default)
 
 2. Install required packages:
 ```bash
@@ -49,68 +68,38 @@ python -m pip install numpy matplotlib
 ```
 
 ### macOS
-- Python 3.10 or later
-- Required Python packages:
-  - numpy
-  - matplotlib
+- Python 3.10 or later (with Tkinter from Homebrew)
+- Required packages: numpy, matplotlib
 
-#### Installation Steps
-1. Install Homebrew (if not already installed):
+#### Steps
+1. Install Homebrew:
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
-2. Install Python using Homebrew:
+2. Install Python:
 ```bash
 brew install python@3.10
 ```
 
-3. Install required packages:
+3. Install packages:
 ```bash
 python3 -m pip install numpy matplotlib
 ```
 
-### Linux (Ubuntu/Debian)
-- Python 3.10 or later
-- Required Python packages:
-  - numpy
-  - matplotlib
-- Tkinter (for GUI)
+### Linux
 
-#### Installation Steps
-1. Update package list and install Python:
+#### Ubuntu/Debian
 ```bash
 sudo apt update
-sudo apt install python3.10 python3.10-venv python3-tk
+sudo apt install python3.10 python3.10-tk python3-pip
+python3 -m pip install numpy matplotlib
 ```
 
-2. Create and activate a virtual environment (recommended):
+#### Fedora/RHEL
 ```bash
-python3.10 -m venv venv
-source venv/bin/activate
-```
-
-3. Install required packages:
-```bash
-pip install numpy matplotlib
-```
-
-### Linux (Fedora/RHEL)
-#### Installation Steps
-1. Install Python and Tkinter:
-```bash
-sudo dnf install python3.10 python3.10-tkinter
-```
-
-2. Create and activate a virtual environment (recommended):
-```bash
-python3.10 -m venv venv
-source venv/bin/activate
-```
-
-3. Install required packages:
-```bash
-pip install numpy matplotlib
+sudo dnf install python3.10 python3.10-tkinter python3-pip
+python3 -m pip install numpy matplotlib
 ```
 
 ## Running the Application
@@ -128,52 +117,54 @@ macOS/Linux:
 python3 lorenz_attractor.py
 ```
 
-If using a virtual environment, first activate it:
-```bash
-# Windows
-venv\Scripts\activate
+## Troubleshooting
 
-# macOS/Linux
-source venv/bin/activate
-```
+### Common Issues
 
-## Historical Background
+1. **"No module named '_tkinter'"**
+   - Windows: Reinstall Python with "tcl/tk and IDLE" checked
+   - macOS: `brew reinstall python@3.10`
+   - Ubuntu/Debian: `sudo apt install python3-tk`
+   - Fedora/RHEL: `sudo dnf install python3-tkinter`
 
-The Lorenz attractor was first described by Edward Lorenz in 1963 while he was studying atmospheric convection. He discovered that very small changes in initial conditions could lead to vastly different outcomes in weather patterns. This discovery laid the foundation for modern chaos theory and introduced the concept of the "butterfly effect" - the idea that a butterfly flapping its wings in Brazil could theoretically cause a tornado in Texas weeks later.
+2. **"No module named 'numpy'/'matplotlib'"**
+   ```bash
+   # Windows
+   python -m pip install numpy matplotlib
+   
+   # macOS/Linux
+   python3 -m pip install numpy matplotlib
+   ```
 
-Lorenz made this discovery accidentally while running weather simulations. When he rounded some numbers in his input from six decimal places to three, he found that the resulting weather pattern diverged dramatically from the original simulation, despite the tiny difference in initial conditions.
+3. **Window appears but is unresponsive**
+   - Update matplotlib: `python -m pip install --upgrade matplotlib`
 
-## Parameters and Their Physical Meaning
+4. **Display issues on Linux**
+   - For WSL: Configure X11 forwarding
+   - Try: `sudo apt install libx11-dev`
 
-Think of the Lorenz system as a simplified model of a fluid (like air or water) being heated from below - similar to a pot of water on a stove. The system uses three numbers (parameters) that control how this fluid behaves:
+## Mathematical Background
 
-1. **σ (sigma) = 10.0**: The Prandtl number
-   - This number describes how "sticky" the fluid is compared to how well it conducts heat
-   - Think of honey vs water: honey is more "sticky" (higher viscosity) and would have a different σ value
-   - In our model, σ = 10 is like modeling air at room temperature
+### Parameters and Their Meaning
 
-2. **ρ (rho) = 28.0**: The Rayleigh number
-   - This represents how much you're heating the fluid from below
-   - Like turning up the heat under a pot of water
-   - Small values (< 1): heat is gentle, fluid stays still
-   - Large values (> 24.74): fluid starts moving in complex patterns
-   - Our value of 28 means we're heating it enough to create interesting patterns
+The Lorenz system models fluid convection with three key parameters:
 
-3. **β (beta) = 8/3**: The geometric factor
-   - This relates to the size and shape of the container holding the fluid
-   - Like having a tall, narrow pot vs a wide, shallow pan
-   - The value 8/3 creates the classic butterfly-shaped pattern
+1. **σ (Sigma)**: The Prandtl number
+   - Describes fluid viscosity vs. heat conductivity
+   - Default: 10.0 (like air at room temperature)
 
-These three numbers work together to create the chaotic behavior we see. If you change any of them even slightly, the pattern can change dramatically. For example:
-- If ρ is too small (< 24.74), the system becomes stable and boring
-- If σ is too large, the fluid becomes too "sticky" to show interesting patterns
-- If β changes, the "wings" of the butterfly pattern can stretch or shrink
+2. **ρ (Rho)**: The Rayleigh number
+   - Represents temperature difference
+   - Critical value: 24.74 (onset of chaos)
+   - Default: 28.0 (chaotic regime)
 
-In our visualization, we keep these numbers fixed at their classic values (σ = 10, ρ = 28, β = 8/3) because these produce the beautiful butterfly pattern that Lorenz discovered. What we change instead are the starting positions of our particles in the fluid, showing how tiny differences in where you start can lead to completely different paths!
+3. **β (Beta)**: The geometric factor
+   - Related to system physical dimensions
+   - Default: 8/3 (classic butterfly shape)
 
-## The Mathematical Equations
+### The Equations
 
-The Lorenz system is described by three differential equations that show how the position of a point (x, y, z) changes over time:
+The Lorenz system is defined by three coupled differential equations:
 
 ```
 dx/dt = σ(y - x)
@@ -182,88 +173,33 @@ dz/dt = xy - βz
 ```
 
 Where:
-- dx/dt means "the rate of change of x with respect to time"
-- x, y, and z represent the state of the system at any moment
-- x could represent the rate of fluid flow
-- y could represent temperature differences across the fluid
-- z could represent how the temperature varies vertically
+- x: Rate of fluid flow
+- y: Temperature difference
+- z: Vertical temperature variation
 
-In our simulation, we use a simple method to solve these equations: we take tiny steps forward in time (dt) and update the position using these rates of change. This is why even tiny differences in starting position can lead to dramatically different paths - each tiny error gets magnified in the next step!
+### Understanding the Visualization
 
-## Understanding the Visualization
+The 3D plot represents:
+- X-axis: Rate of fluid flow
+- Y-axis: Temperature differences
+- Z-axis: Vertical temperature variation
+- Trajectories: System evolution over time
+- "Wings": Stable regions of the attractor
 
-Our program creates a 3D visualization of the Lorenz attractor that looks like a butterfly or figure-eight pattern. Here's how to understand what you're seeing:
+## Theory and Concepts
 
-### What Are We Looking At?
+### Historical Background
 
-1. **The Space**: 
-   - The 3D space represents all possible states of our fluid system
-   - Each point in this space represents a unique combination of flow rate (x), temperature difference (y), and vertical temperature variation (z)
-   - Think of it like a 3D map where each point tells us the complete state of our fluid at a moment in time
+Edward Lorenz discovered this system in 1963 while studying weather patterns. He found that tiny differences in initial conditions led to vastly different outcomes, introducing the concept of the "butterfly effect."
 
-2. **The Trajectories**:
-   - The lines you see are like trails left by particles in the fluid
-   - Each line shows how the system changes over time
-   - We plot two trajectories with slightly different starting points (differing by just 0.01 in the x-direction)
+### Chaos Theory
 
-3. **The Butterfly Shape**:
-   - The famous butterfly pattern emerges because the system never exactly repeats but always stays within certain bounds
-   - The two "wings" represent two main regions where the system spends most of its time
-   - The system loops around one wing for a while, then unpredictably switches to the other wing
+The Lorenz system demonstrates key chaos principles:
+1. Sensitivity to initial conditions
+2. Bounded but non-repeating behavior
+3. Deterministic unpredictability
 
-### How to Read the Plot
-
-1. **Following the Path**:
-   - Start at any point on a trajectory
-   - Follow it forward in time (along the line)
-   - Notice how it:
-     * Spirals outward on one wing
-     * Suddenly jumps to the other wing
-     * Repeats this pattern, but never exactly the same way twice
-
-2. **Understanding Chaos**:
-   - Watch how the two trajectories (starting at nearly the same point) stay together briefly
-   - See them diverge dramatically after a short time
-   - Even though they follow the same general butterfly shape, their exact paths are very different
-
-3. **Key Features**:
-   - The empty space in the middle: the system never stays here long
-   - The dense areas in the wings: these are where the system spends most of its time
-   - The crossing points: places where the system can go multiple different ways
-
-This visualization helps us understand how a simple set of rules (our three equations) can create complex, unpredictable behavior while still maintaining an overall structure. It's a beautiful example of chaos: unpredictable in detail, but predictable in general pattern.
-
-## Chaos Theory and the Butterfly Effect
-
-The Lorenz attractor demonstrates several key principles of chaos theory:
-
-1. **Sensitivity to Initial Conditions**: Two nearly identical starting points will lead to dramatically different trajectories over time. This is visualized in our model by plotting two trajectories with slightly different initial conditions.
-
-2. **Strange Attractor**: The system never settles into a steady state or simple periodic behavior. Instead, it follows a complex, never-repeating pattern while staying within a bounded region (the butterfly-shaped attractor).
-
-3. **Deterministic Chaos**: Although the system is completely deterministic (future states are fully determined by initial conditions), its behavior appears random or chaotic due to its extreme sensitivity to initial conditions.
-
-Our visualization shows two trajectories:
-- One starting at point (1, 1, 1)
-- Another starting at point (1.01, 1, 1)
-
-Watch how these nearly identical starting points diverge dramatically over time, while both remaining within the bounds of the strange attractor.
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Tkinter not found**
-   - Windows: Reinstall Python and make sure to check "tcl/tk and IDLE" during installation
-   - Linux: Install python3-tk package (`sudo apt install python3-tk` or `sudo dnf install python3-tkinter`)
-   - macOS: Install Python using Homebrew which includes Tkinter
-
-2. **ImportError: No module named numpy/matplotlib**
-   - Make sure you've installed the required packages:
-     ```bash
-     python -m pip install -r requirements.txt
-     ```
-
-3. **Display issues on Linux**
-   - If using WSL or SSH, make sure you have X11 forwarding properly configured
-   - Consider using a virtual display like Xvfb if running headless
+The visualization shows these through:
+- Multiple trajectories with slightly different starts
+- The bounded butterfly-shaped attractor
+- Unpredictable switching between wings
