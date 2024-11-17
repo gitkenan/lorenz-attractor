@@ -2,6 +2,112 @@
 
 This project models the Lorenz attractor, a classic example of a chaotic system that demonstrates sensitivity to initial conditions.
 
+## Requirements and Installation
+
+### Windows
+- Python 3.10 or later
+- Required Python packages:
+  - numpy
+  - matplotlib
+
+#### Installation Steps
+1. Install Python 3.10 from [Python's official website](https://www.python.org/downloads/)
+   - During installation, make sure to check "Add Python to PATH"
+
+2. Install required packages:
+```bash
+python -m pip install numpy matplotlib
+```
+
+### macOS
+- Python 3.10 or later
+- Required Python packages:
+  - numpy
+  - matplotlib
+
+#### Installation Steps
+1. Install Homebrew (if not already installed):
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+2. Install Python using Homebrew:
+```bash
+brew install python@3.10
+```
+
+3. Install required packages:
+```bash
+python3 -m pip install numpy matplotlib
+```
+
+### Linux (Ubuntu/Debian)
+- Python 3.10 or later
+- Required Python packages:
+  - numpy
+  - matplotlib
+- Tkinter (for GUI)
+
+#### Installation Steps
+1. Update package list and install Python:
+```bash
+sudo apt update
+sudo apt install python3.10 python3.10-venv python3-tk
+```
+
+2. Create and activate a virtual environment (recommended):
+```bash
+python3.10 -m venv venv
+source venv/bin/activate
+```
+
+3. Install required packages:
+```bash
+pip install numpy matplotlib
+```
+
+### Linux (Fedora/RHEL)
+#### Installation Steps
+1. Install Python and Tkinter:
+```bash
+sudo dnf install python3.10 python3.10-tkinter
+```
+
+2. Create and activate a virtual environment (recommended):
+```bash
+python3.10 -m venv venv
+source venv/bin/activate
+```
+
+3. Install required packages:
+```bash
+pip install numpy matplotlib
+```
+
+## Running the Application
+
+1. Navigate to the project directory
+2. Run the visualization:
+
+Windows:
+```bash
+python lorenz_attractor.py
+```
+
+macOS/Linux:
+```bash
+python3 lorenz_attractor.py
+```
+
+If using a virtual environment, first activate it:
+```bash
+# Windows
+venv\Scripts\activate
+
+# macOS/Linux
+source venv/bin/activate
+```
+
 ## Historical Background
 
 The Lorenz attractor was first described by Edward Lorenz in 1963 while he was studying atmospheric convection. He discovered that very small changes in initial conditions could lead to vastly different outcomes in weather patterns. This discovery laid the foundation for modern chaos theory and introduced the concept of the "butterfly effect" - the idea that a butterfly flapping its wings in Brazil could theoretically cause a tornado in Texas weeks later.
@@ -98,6 +204,67 @@ Our program creates a 3D visualization of the Lorenz attractor that looks like a
 
 This visualization helps us understand how a simple set of rules (our three equations) can create complex, unpredictable behavior while still maintaining an overall structure. It's a beautiful example of chaos: unpredictable in detail, but predictable in general pattern.
 
+## Interactive Controls
+
+The visualization now includes real-time parameter controls that allow you to explore how changes in the system parameters affect the behavior of the Lorenz attractor:
+
+### Parameter Sliders
+
+1. **σ (Sigma) Slider**: 0-50
+   - Controls how quickly the system responds to differences in temperature
+   - Lower values: slower response
+   - Higher values: faster response
+   - Default: 10.0
+
+2. **ρ (Rho) Slider**: 0-100
+   - Controls the temperature difference driving the convection
+   - Values < 1: No convection, system stabilizes
+   - Values > 24.74: Chaotic behavior emerges
+   - Default: 28.0
+
+3. **β (Beta) Slider**: 0-20
+   - Controls the physical shape of the system
+   - Affects the size and shape of the attractor's "wings"
+   - Default: 8.0
+
+### Interesting Parameter Combinations to Try:
+
+1. **Classic Chaos** (Default):
+   - σ = 10.0
+   - ρ = 28.0
+   - β = 8/3
+   - Shows the classic butterfly-shaped attractor
+
+2. **Stable System**:
+   - σ = 10.0
+   - ρ = 20.0
+   - β = 8/3
+   - System stabilizes to a single point
+
+3. **Periodic Behavior**:
+   - σ = 10.0
+   - ρ = 100.0
+   - β = 8/3
+   - Creates more complex orbital patterns
+
+4. **Extreme Chaos**:
+   - σ = 14.0
+   - ρ = 28.0
+   - β = 2.67
+   - Shows more erratic behavior
+
+### View Controls:
+- Left click + drag: Rotate the view
+- Right click + drag: Pan the view
+- Mouse wheel: Zoom in/out
+- 'R' key: Reset to default view
+
+### Additional Features:
+- Reset Parameters button to return to default values
+- Real-time trajectory updates as parameters change
+- Color-coded trajectories for different initial conditions
+- Current parameter values displayed in the visualization
+
 ## Chaos Theory and the Butterfly Effect
 
 The Lorenz attractor demonstrates several key principles of chaos theory:
@@ -114,6 +281,21 @@ Our visualization shows two trajectories:
 
 Watch how these nearly identical starting points diverge dramatically over time, while both remaining within the bounds of the strange attractor.
 
-## Running the Model
+## Troubleshooting
 
-You can run the model by executing the `lorenz_attractor.py` script. It will generate a 3D visualization of the Lorenz attractor, saved as `lorenz_attractor_3d.png`.
+### Common Issues
+
+1. **Tkinter not found**
+   - Windows: Reinstall Python and make sure to check "tcl/tk and IDLE" during installation
+   - Linux: Install python3-tk package (`sudo apt install python3-tk` or `sudo dnf install python3-tkinter`)
+   - macOS: Install Python using Homebrew which includes Tkinter
+
+2. **ImportError: No module named numpy/matplotlib**
+   - Make sure you've installed the required packages:
+     ```bash
+     python -m pip install -r requirements.txt
+     ```
+
+3. **Display issues on Linux**
+   - If using WSL or SSH, make sure you have X11 forwarding properly configured
+   - Consider using a virtual display like Xvfb if running headless
